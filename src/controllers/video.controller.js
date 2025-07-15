@@ -137,3 +137,18 @@ export const getAllVideos = async (req, res) => {
     });
   }
 };
+
+export const getMyVideos = async (req, res) => {
+  try {
+    const videos = await Video.find({ user_id: req.user._id }).sort({
+      createdAt: -1,
+    });
+    res.status(200).json(videos);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: "error in getting my videos",
+      message: error.message,
+    });
+  }
+};
