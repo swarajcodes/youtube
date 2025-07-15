@@ -193,3 +193,18 @@ export const getVideobyCategory = async (req, res) => {
     });
   }
 };
+
+export const getVideoByTag = async (req, res) => {
+  try {
+    const tag = req.params.tag;
+    const videos = await Video.find({ tags: tag }).sort({ createdAt: -1 });
+
+    res.status(200).json(videos);
+  } catch (error) {
+    console.error("Error in getbyTag", error);
+    res.status(500).json({
+      error: "error in getting by tags",
+      message: error.message,
+    });
+  }
+};
