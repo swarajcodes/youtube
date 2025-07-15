@@ -178,3 +178,18 @@ export const getVideoById = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const getVideobyCategory = async (req, res) => {
+  try {
+    const videos = await Video.find({ category: req.params.category }).sort({
+      createdAt: -1,
+    });
+    res.status(200).json(videos);
+  } catch (error) {
+    console.error("Error in getbycategory", error);
+    res.status(500).json({
+      error: "error in getting by category",
+      message: error.message,
+    });
+  }
+};
