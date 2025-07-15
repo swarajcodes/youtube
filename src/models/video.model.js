@@ -68,7 +68,6 @@ videoSchema.virtual("views").get(function () {
   return this.viewedBy.length;
 });
 
-// Ensure virtual fields are included in JSON output
 videoSchema.set("toJSON", {
   virtuals: true,
 });

@@ -8,6 +8,7 @@ import {
   getVideoById,
   getVideobyCategory,
   getVideoByTag,
+  likeVideo,
 } from "../controllers/video.controller.js";
 import { checkAuth } from "../middlewares/auth.middleware.js";
 
@@ -23,5 +24,7 @@ videoRouter.get("/:id", checkAuth, getVideoById);
 videoRouter.get("/tags/:tag", getVideoByTag);
 videoRouter.get("/category/:category", getVideobyCategory);
 videoRouter.get("/all", getAllVideos);
+
+videoRouter.post("/like", checkAuth, likeVideo);
 
 export default videoRouter;
