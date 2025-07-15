@@ -125,3 +125,15 @@ export const deleteVideo = async (req, res) => {
       .json({ error: "error in deleting video", message: error.message });
   }
 };
+
+export const getAllVideos = async (req, res) => {
+  try {
+    const videos = await Video.find().sort({ createdAt: -1 });
+    res.status(200).json(videos);
+  } catch (error) {
+    res.status(500).json({
+      error: "error in getting all videos",
+      message: error.message,
+    });
+  }
+};
