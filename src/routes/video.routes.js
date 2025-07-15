@@ -9,6 +9,7 @@ import {
   getVideobyCategory,
   getVideoByTag,
   likeVideo,
+  dislikeVideo
 } from "../controllers/video.controller.js";
 import { checkAuth } from "../middlewares/auth.middleware.js";
 
@@ -26,5 +27,6 @@ videoRouter.get("/category/:category", getVideobyCategory);
 videoRouter.get("/all", getAllVideos);
 
 videoRouter.post("/like", checkAuth, likeVideo);
+videoRouter.post("/dislike", checkAuth, dislikeVideo);
 
 export default videoRouter;

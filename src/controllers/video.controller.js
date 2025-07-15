@@ -229,3 +229,24 @@ export const likeVideo = async (req, res) => {
     });
   }
 };
+
+export const dislikeVideo = async (req, res) => {
+  try {
+    const { videoId } = req.body;
+
+    const video = await Video.findByIdAndUpdate(videoId, {
+      $addToSet: { disLikedBy: req.user._id },
+      $pull: { likedBy: req.user._id },
+    });
+    res.status(200).json({
+      message: "Disliked the video",
+      video,
+    });
+  } catch (error) {
+    console.error("Error in dislikeVideo", error);
+    res.status(500).json({
+      error: "error in disliking the Video",
+      message: error.message,
+    });
+  }
+};
